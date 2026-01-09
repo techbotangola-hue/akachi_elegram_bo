@@ -1,28 +1,16 @@
-import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = "COLE_AQUI_O_TOKEN_DO_BOTFATHER"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "🤖 Akachi Signals ativo!\n\n"
-        "/sinal - Receber sinal OTC\n"
-        "/ajuda - Ajuda"
-    )
+    await update.message.reply_text("✅ Bot online com sucesso!")
 
-async def sinal(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "📊 EUR/USD OTC\n📈 CALL\n⏱️ 1 MIN\n🕐 AGORA"
-    )
+def main():
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    print("Bot iniciado com sucesso")
+    app.run_polling()
 
-async def ajuda(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("⚠️ Use sempre gestão de risco.")
-
-app = ApplicationBuilder().token(TOKEN).build()
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("sinal", sinal))
-app.add_handler(CommandHandler("ajuda", ajuda))
-
-print("Bot online...")
-app.run_polling()
+if __name__ == "__main__":
+    main()
